@@ -1,0 +1,9 @@
+<LLMConfig>
+  <TemperatureStage CHARACTER_BIBLE="0.85"
+                    PREMISE="0.75"
+                    BEAT_SHEET="0.60"
+                    SCENE_DRAFT="0.45"
+                    REVISION="0.25"/>
+  <PresencePenalty>0.6</PresencePenalty>
+  <CreativityDeviation initial="0.15" ramp="linear"/>
+</LLMConfig>

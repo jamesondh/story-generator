@@ -1,0 +1,55 @@
+<!--  StoryPrompt v0.4  —  modular, POCL‑aware, variation‑friendly  -->
+<StoryPrompt
+        version="0.4"
+        iteration_stage=""           <!-- FILLED BY AGENT -->
+        deliverable=""               <!-- e.g. CHARACTER_VARIATIONS -->
+        variations="3"
+        label_scheme="Pitch_A|Pitch_B|Pitch_C"
+        return_format="XML">
+
+  <!-- ===== META (dynamic, read from /prompts/config/llm_config.xml) ===== -->
+  <Meta reference="prompts/config/llm_config.xml"/>
+
+  <!-- ===== LOCK / VAR MATRIX ===== -->
+  <!-- Filled during the refinement Q&A.  Everything in <Lock> must stay
+       identical across the three variations; everything in <Vary> is free. -->
+  <RefinementMatrix>
+    <Lock>
+      <Characters ids="ALL"/>             <!-- default = keep cast fixed -->
+      <Setting elements="world,time"/>    <!-- world/time remain fixed -->
+    </Lock>
+    <Vary>
+      <Plot scope="central_conflict"/>    <!-- only alter conflict/outcome -->
+      <Theme adjust_weights="true"/>      <!-- may rebalance weights -->
+    </Vary>
+  </RefinementMatrix>
+
+  <!-- ===== CURRENT CANON POINTERS (agent auto‑inlines latest XML) ===== -->
+  <CanonFiles>
+    <Themes path="story/current/themes.xml"/>
+    <World  path="story/current/world.xml"/>
+    <Characters path="story/current/characters.xml"/>
+    <Plot path="story/current/plot.xml"/>
+    <Mechanics path="story/current/mechanics.xml"/>
+  </CanonFiles>
+
+  <!-- ===== PLANNER (POCL / IPOCL compatible) ===== -->
+  <Planner>
+    <RootGoal/>                           <!-- one sentence outcome -->
+    <CausalLinks>
+      <!-- Each <Link cause="id" effect="id"/> is filled by agent in
+           BeatSheet stage for traceability & validation. -->
+    </CausalLinks>
+    <CharacterIntents>
+      <!-- One <Intent char="c1" goal="…"/> per key character -->
+    </CharacterIntents>
+    <MustEvents order="linear">
+      <!-- agent inserts <Event id=""> stubs if operator requests invariants -->
+    </MustEvents>
+    <SoftEvents prob="0.40"/>
+  </Planner>
+
+  <!-- ===== SELF‑CRITIQUE placeholder ===== -->
+  <SelfCritique/>
+
+</StoryPrompt>
