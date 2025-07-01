@@ -30,7 +30,6 @@ repo/
 │   ├── generate_variations.py  # CLI wrapper → calls LLM step‑by‑step
 │   ├── validate_output.py      # schema & naming compliance checker
 │   └── archive_old_files.py    # housekeeping after acceptance
-├── tests/                      # unchanged – add schemas as needed
 ├── AGENTS.md                   # (this guide)
 └── README.md                   # operator guide
 ```
